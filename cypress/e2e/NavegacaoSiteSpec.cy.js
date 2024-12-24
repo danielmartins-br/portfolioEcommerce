@@ -6,8 +6,251 @@ describe('Fluxo de Compras', function() {
         cy.acessaSite()
     })
 
-    it.only('Verifica se as páginas principais ("Home", "Sign In", "Contato", "Categories", "Idioma") são carregadas corretamente.', function() {
+    it('Verifica se a página "Home" é carregada corretamente.', function() {
         
+        //Verifica página Home
+        cy.get('[data-test="nav-home"]')
+        .should('be.visible')
+        .click()
+
+        cy.get('.img-fluid')
+        .should('be.visible')  //Banner do site aparece somente na Home
+    })
+
+    it('Verifica se as páginas de "Categories" são carregadas corretamente.', function() {
+        //Verifica Categories
+        cy.get('[data-test="nav-categories"]')
+        .should('be.visible')
+        .click()
+
+        cy.get('.navbar-nav > .dropdown > .dropdown-menu')
+        .should('contain', 'Hand Tools')
+        .should('contain', 'Power Tools')
+        .should('contain', 'Other')
+        .should('contain', 'Special Tools')
+        .should('contain', 'Rentals') 
+
+        //Seleciona Categoria "Hand Tools"
+        cy.get('.navbar-nav > .dropdown > .dropdown-menu')
+        .contains('Hand Tools')
+        .should('be.visible')
+        .click()
+
+        cy.get('[data-test="page-title"]')
+        .should('have.text', 'Category: Hand Tools')
+
+        //Seleciona Categoria "Power Tools"
+        cy.get('[data-test="nav-categories"]')
+        .click()
+        cy.get('.navbar-nav > .dropdown > .dropdown-menu')
+        .contains('Power Tools')
+        .should('be.visible')
+        .click()
+
+        cy.get('[data-test="page-title"]')
+        .should('have.text', 'Category: Power Tools')
+
+        //Seleciona Categoria "Other"
+        cy.get('[data-test="nav-categories"]')
+        .click()
+        cy.get('.navbar-nav > .dropdown > .dropdown-menu')
+        .contains('Other')
+        .should('be.visible')
+        .click()
+
+        cy.get('[data-test="page-title"]')
+        .should('have.text', 'Category: Other')
+
+        //Seleciona Categoria "Special Tools"
+        cy.get('[data-test="nav-categories"]')
+        .click()
+        cy.get('.navbar-nav > .dropdown > .dropdown-menu')
+        .contains('Special Tools')
+        .should('be.visible')
+        .click()
+
+        cy.get('[data-test="page-title"]')
+        .should('have.text', 'Category: Special Tools')
+
+        //Seleciona Categoria "Rentals"
+        cy.get('[data-test="nav-categories"]')
+        .click()
+        cy.get('.navbar-nav > .dropdown > .dropdown-menu')
+        .contains('Rentals')
+        .should('be.visible')
+        .click()
+
+        cy.get('[data-test="page-title"]')
+        .should('have.text', 'Rentals', {timeout:6000})
+    })
+
+    it('Verifica lista de idiomas', function() {
+        //Verifica Idioma, por padrão o site é carregado em inglês
+        cy.get('[data-test="language"]')
+        .should('be.visible')
+        .click()
+
+        cy.get('#dropdown-animated')
+        .should('contain', 'DE')
+        .should('contain', 'EN')
+        .should('contain', 'ES')
+        .should('contain', 'FR')
+        .should('contain', 'NL')
+        .should('contain', 'TR')
+
+        //Muda idioma para alemão
+        cy.get('#dropdown-animated')
+        .contains('DE')
+        .click()
+        cy.get('[data-test="language"]')
+        .should('contain.text', 'DE')
+
+        //Verifica se o idioma mudou
+        cy.get('#filters')
+        .should('contain.text','Sortieren')
+        .should('contain.text','Preisspanne')
+
+        //Muda o idioma para espanhol
+        cy.get('[data-test="language"]')
+        .click()
+        cy.get('#dropdown-animated')
+        .contains('ES')
+        .click()
+        cy.get('[data-test="language"]')
+        .should('contain.text', 'ES')
+
+        //Verifica se o idioma mudou
+        cy.get('#filters')
+        .should('contain.text','Ordenar')
+        .should('contain.text','Rango de precios')
+
+        //Muda o idioma para frances
+        cy.get('[data-test="language"]')
+        .click()
+        cy.get('#dropdown-animated')
+        .contains('FR')
+        .click()
+        cy.get('[data-test="language"]')
+        .should('contain.text', 'FR')
+
+        //Verifica se o idioma mudou
+        cy.get('#filters')
+        .should('contain.text','Rechercher')
+        .should('contain.text','Fourchette de prix')
+
+        //Muda o idioma para holandês
+        cy.get('[data-test="language"]')
+        .click()
+        cy.get('#dropdown-animated')
+        .contains('NL')
+        .click()
+        cy.get('[data-test="language"]')
+        .should('contain.text', 'NL')
+
+        //Verifica se o idioma mudou
+        cy.get('#filters')
+        .should('contain.text','Zoeken')
+        .should('contain.text','Prijsklasse')
+
+        //Muda o idioma para turco
+        cy.get('[data-test="language"]')
+        .click()
+        cy.get('#dropdown-animated')
+        .contains('TR')
+        .click()
+        cy.get('[data-test="language"]')
+        .should('contain.text', 'TR')
+
+        //Verifica se o idioma mudou
+        cy.get('#filters')
+        .should('contain.text','Sırala')
+        .should('contain.text','Fiyat Aralığı')
+    })
+
+    it('Verifica se a página "Sign In" é carregada corretamente', function(){
+        //Verifica página de Sign In
+        cy.get('[data-test="nav-sign-in"]')
+        .should('be.visible')
+        .click()
+
+        cy.get('h3').contains('Login')
+        .should('be.visible')
+
+        //Botão de login com Google
+        cy.get('button')
+        .contains('Sign in with Google')
+        .should('contain.text', 'Sign in with Google')
+        .should('be.visible')
+        
+        //Verifica campos da tela [email,senha,login]
+        cy.get('[data-test="login-form"]')
+        .should('contain.text', 'Email address *')
+        .should('contain.text', 'Password *')
+        cy.get('[data-test="login-submit"]')
+        .should('be.visible')
+
+        //Registrar nova conta
+        cy.get('[data-test="register-link"]')
+        .should('be.visible')
+
+        //Esqueci minha senha
+        cy.get('[data-test="forgot-password-link"]')
+        .should('be.visible')
+        .click()
+
+        cy.get('h3').contains('Forgot Password')
+        .should('be.visible')
+        cy.get('[data-test="email"]')
+        .should('be.visible')
+        cy.get('[data-test="forgot-password-submit"]')
+        .should('be.visible')
+    })
+
+    it('Verifica se a página "Customer Registration" é exibida corretamente', function() {
+        cy.get('[data-test="nav-sign-in"]')
+        .should('be.visible')
+        .click()
+
+        //Registrar nova conta
+        cy.get('[data-test="register-link"]')
+        .should('be.visible')
+        .click()
+
+        //Verifica campos da tela
+        cy.get('h3').contains('Customer registration')
+        .should('be.visible')
+
+        cy.get('[data-test="first-name"]')
+        .should('be.visible')
+        cy.get('[data-test="last-name"]')
+        .should('be.visible')
+        cy.get('[data-test="dob"]')
+        .should('be.visible')
+        cy.get('[data-test="address"]')
+        .should('be.visible')
+        cy.get('[data-test="postcode"]')
+        .should('be.visible')
+        cy.get('[data-test="city"]')
+        .should('be.visible')
+        cy.get('[data-test="state"]')
+        .should('be.visible')
+        cy.get('[data-test="country"]')
+        .should('be.visible')
+        cy.get('[data-test="phone"]')
+        .should('be.visible')
+        cy.get('[data-test="email"]')
+        .should('be.visible')
+        cy.get('[data-test="password"]')
+        .should('be.visible')
+        cy.get('#passwordHelp')
+        .should('be.visible')
+        cy.get('.password-strength')
+        .should('be.visible')
+        cy.get('[data-test="register-submit"]')
+        .should('be.visible')
+    })
+
+    it('Verifica se a página "Contact" é carregada corretamente', function() {
         //Verifica página de Contato
         cy.get('[data-test="nav-contact"]')
         .should('be.visible')
@@ -16,6 +259,7 @@ describe('Fluxo de Compras', function() {
         cy.get('h3').contains('Contact')
         .should('be.visible')
 
+        //Campos do formulário
         cy.get('.form-label')
         .should('contain.text', 'First name')
         .should('contain.text', 'Last name')
@@ -38,50 +282,9 @@ describe('Fluxo de Compras', function() {
         .select('Payments')
         .select('Warranty')
         .select('Status of my order')
-
-        //Verifica página de Sign In
-        cy.get('[data-test="nav-sign-in"]')
-        .should('be.visible')
-        .click()
-
-        cy.get('h3').contains('Login')
-        .should('be.visible')
-
-        //Verifica página Home
-        cy.get('[data-test="nav-home"]')
-        .should('be.visible')
-        .click()
-
-        cy.get('.img-fluid')
-        .should('be.visible')
-
-        //Verifica Categories
-        cy.get('[data-test="nav-categories"]')
-        .should('be.visible')
-        .click()
-
-        cy.get('.navbar-nav > .dropdown > .dropdown-menu')
-        .should('contain', 'Hand Tools')
-        .should('contain', 'Power Tools')
-        .should('contain', 'Other')
-        .should('contain', 'Special Tools')
-        .should('contain', 'Rentals')
-
-        //Verifica Idioma
-        cy.get('[data-test="language"]')
-        .should('be.visible')
-        .click()
-
-        cy.get('#dropdown-animated')
-        .should('contain', 'DE')
-        .should('contain', 'EN')
-        .should('contain', 'ES')
-        .should('contain', 'FR')
-        .should('contain', 'NL')
-        .should('contain', 'TR')
     })
     
-    it('Verifica itens da categoria "Hand Tools"', function() {
+    it('Verifica filtro de itens da categoria "Hand Tools"', function() {
 
         //Filtra somente por "Hand Tools" na Tela Inicial
         cy.get(':nth-child(13) > :nth-child(2) > :nth-child(1)')
@@ -232,7 +435,7 @@ describe('Fluxo de Compras', function() {
         .should('contain', 'Square Ruler')
     })
 
-    it('Verifica itens da categoria "Power Tools"', function() {
+    it('Verifica filtro de itens da categoria "Power Tools"', function() {
 
         //Filtra somente por "Power Tools" na Tela Inicial
         cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > label')
@@ -316,7 +519,7 @@ describe('Fluxo de Compras', function() {
 
     })
 
-    it('Verifica Itens da categoria "Other"', function() {
+    it('Verifica filtro de itens da categoria "Other"', function() {
 
         cy.get('#filters > fieldset:nth-child(13) > div:nth-child(4) > label')
         .contains('Other')
@@ -430,7 +633,7 @@ describe('Fluxo de Compras', function() {
 
         //Filtra somente itens da marca "ForgeFlex Tools"
         cy.get('#filters > fieldset:nth-child(16) > div:nth-child(2) > label')
-        .contains('ForgeFlex Tools')
+        .contains('ForgeFlex Tools',{timeout: 5000})
         .click()
         //Filtra por um item específico da marca
         cy.get('.col-md-9')
@@ -458,7 +661,7 @@ describe('Fluxo de Compras', function() {
         .should('contain', 'Belt Sander')
         //Verifica se a marca "ForgeFlex Tools" não está selecionada
         cy.get('#filters > fieldset:nth-child(16) > div:nth-child(2) > label')
-        .contains('ForgeFlex Tools')
+        .contains('ForgeFlex Tools',{timeout: 5000})
         .should('not.be.checked')
 
         //Desmarca itens da marca
@@ -526,10 +729,12 @@ describe('Fluxo de Compras', function() {
         .should('have.attr', 'aria-valuenow', '1')     
     })
 
-    it('Verifica ordenação de produtos', function() {
+    it('Verifica ordenação de produtos', { defaultCommandTimeout: 15000, retries: 2 }, function() {
+        /*Foi definido um número maior de timeout e retry pois o site costuma demorar a responder para
+        ordenar os itens da tela, o teste falhava as vezes por demora da resposta.
+        */
 
         cy.reload()
-        cy.wait(2000)
         /*Por padrão o site exibe produtos de $1 até $100,
         sendo necessário acionar um filtro para visualizar produtos mais caros.
         */
@@ -542,8 +747,7 @@ describe('Fluxo de Compras', function() {
         cy.get('[data-test="sort"]')
         .select('Price (Low - High)')
 
-        cy.wait(5000) //O site demora alguns segundos para ordenar os itens, por isso o delay
-        cy.get('[data-test="product-price"]', { timeout: 8000 })
+        cy.get('[data-test="product-price"]')
         .should('contain.text', `${arruela}`) //Verifica o item mais barato
         .should('contain.text', `${parafuso}`) //Verifica o segundo item mais barato 
         .should('not.contain.text', `${valorAcimaDoFiltrado}`) //Verificando um valor que não deve existir na primeira página 
