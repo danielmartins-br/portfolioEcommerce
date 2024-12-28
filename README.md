@@ -37,23 +37,25 @@ A documentação para todos os casos de teste implementados encontra-se na pasta
 1. Clone o repositório:
    ```bash
    git clone https://github.com/danielmartins-br/portfolioEcommerce.git
-2. Acesse a pasta "portfolioEcommerce"
-3. Dentro da pasta instale as dependências:
+2. Acesse a pasta do projeto:
+   ```bash
+   cd portfolioEcommerce
+4. Dentro da pasta instale as dependências:
    ```bash
    npm install
-4. Execute o Cypress:
+5. Execute o Cypress:
    ```bash
    npx cypress open
-5. Dentro do Cypress selecione:
+6. Dentro do Cypress selecione:
    ```bash
    E2E Testing
-6. Selecione um browser:
+7. Selecione um browser:
    ```bash
    Chrome
-7. Clique em:
+8. Clique em:
    ```bash
    Start E2E Testing in Chrome
-8. Dentro de **Specs** selecione o teste que deseja executar:
+9. Dentro de **Specs** selecione o teste que deseja executar:
    ```bash
    Exemplo: cypress/e2e/NavegacaoSiteSpec.cy.js
 
