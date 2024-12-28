@@ -30,6 +30,9 @@ O meu objetivo principal com o projeto é aprender a utilizar Cypress e praticar
 - Node.js e npm instalados.
 - Cypress configurado no ambiente local.
 
+#### Documentação do Projeto
+A documentação para todos os casos de teste implementados encontra-se na pasta ```.\cypress\documentation\```
+
 #### Instalação
 1. Clone o repositório:
    ```bash
