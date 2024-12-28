@@ -79,9 +79,12 @@ Isso é útil ao trabalhar em testes individuais durante o desenvolvimento.
 Exemplo: ```npx cypress run --spec cypress/integration/nome-do-arquivo-spec.js```
 
 ##### 🗨️ Nota do Desenvolvedor:
-* O projeto ainda encontra-se sem documentação, até o momento foi criado o código base com 15 casos de teste que verificam todas as funcionalidades do site porém não interage diretamente com elas, por exemplo produtos não são adicionados no carrinho e nem é criado uma nova conta para o usuário, somente é verificado se os produtos são listados em tela e  se os campos de dados do usuário são exibidos em tela. 
+* O projeto agora encontra-se com documentação, até o momento foi criado o código base com 56 casos de teste que verificam todas as funcionalidades do site porém não interage diretamente com elas, por exemplo produtos não são adicionados no carrinho e nem é criado uma nova conta para o usuário, somente é verificado se os produtos são listados em tela e  se os campos de dados do usuário são exibidos em tela. 
 * Os testes atuais somente verificam se cada coisa está no seu devido lugar, futuramente serão criados novos testes para verificar carrinho de compras, criação de usuário, pesquisa de produtos e mais...
-   **📃 Lista das próximas melhorias:**
-   * [ ] - Criação de documentação para cada caso de teste
+
+  **📃 Lista das próximas melhorias:**
+   * [X] - Criação de documentação para cada caso de teste
    * [ ] - Implementação de page objects model para melhorar a legibilidade/organização dos testes
-   * [ ] - Criar novos casos de teste contemplando mais funcionalidades do site 
+   * [X] - Criar novos casos de teste contemplando mais funcionalidades do site
+   * [ ] - Criar novoso casos de teste que interagem diretamente com as funcionalidades do site [criar usuário, preencher carrinho...]
+   * [ ] - Criar documentação para cada um dos novos casos de teste de interação
