@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Fluxo de Compras', function() {
+describe('Fluxos do Site', function() {
 
     this.beforeEach(() => {
         cy.acessaSite()
@@ -17,105 +17,148 @@ describe('Fluxo de Compras', function() {
         .should('be.visible')  //Banner do site aparece somente na Home
     })
 
-    it('Verifica se as páginas de "Categories" são carregadas corretamente.', function() {
+    it('Verifica se itens do menu "Categories" são listados corretamente.', function() {
         //Verifica Categories
         cy.get('[data-test="nav-categories"]')
         .should('be.visible')
         .click()
 
-        cy.get('.navbar-nav > .dropdown > .dropdown-menu')
-        .should('contain', 'Hand Tools')
-        .should('contain', 'Power Tools')
-        .should('contain', 'Other')
-        .should('contain', 'Special Tools')
-        .should('contain', 'Rentals') 
+        cy.get('[data-test="nav-hand-tools"]')
+        .should('be.visible')
+        cy.get('[data-test="nav-power-tools"]')
+        .should('be.visible')
+        cy.get('[data-test="nav-other"]')
+        .should('be.visible')
+        cy.get('[data-test="nav-special-tools"]')
+        .should('be.visible')
+        cy.get('[data-test="nav-rentals"]')
+        .should('be.visible')
+    })
+
+    it('Seleciona categoria "Hand Tools" do menu "Categories"', function(){
+        //Clica no menu
+        cy.get('[data-test="nav-categories"]')
+        .click()
 
         //Seleciona Categoria "Hand Tools"
-        cy.get('.navbar-nav > .dropdown > .dropdown-menu')
-        .contains('Hand Tools')
+        cy.get('[data-test="nav-hand-tools"]')
         .should('be.visible')
+        .should('contain.text', 'Hand Tools')
         .click()
 
+        //Verifica título da página
         cy.get('[data-test="page-title"]')
         .should('have.text', 'Category: Hand Tools')
+    })
+
+    it('Seleciona categoria "Power Tools" do menu "Categories"', function(){
+        //Clica no menu
+        cy.get('[data-test="nav-categories"]')
+        .click()
 
         //Seleciona Categoria "Power Tools"
-        cy.get('[data-test="nav-categories"]')
-        .click()
-        cy.get('.navbar-nav > .dropdown > .dropdown-menu')
-        .contains('Power Tools')
+        cy.get('[data-test="nav-power-tools"]')
         .should('be.visible')
+        .should('contain.text', 'Power Tools')
         .click()
 
+        //Verifica título da página
         cy.get('[data-test="page-title"]')
         .should('have.text', 'Category: Power Tools')
+    })
+
+    it('Seleciona categoria "Other" do menu "Categories"', function() {
+        //Clica no menu
+        cy.get('[data-test="nav-categories"]')
+        .click()
 
         //Seleciona Categoria "Other"
-        cy.get('[data-test="nav-categories"]')
-        .click()
-        cy.get('.navbar-nav > .dropdown > .dropdown-menu')
-        .contains('Other')
+        cy.get('[data-test="nav-other"]')
         .should('be.visible')
+        .should('contain.text', 'Other')
         .click()
 
+        //Verifica título da página
         cy.get('[data-test="page-title"]')
         .should('have.text', 'Category: Other')
+    })
 
-        //Seleciona Categoria "Special Tools"
+    it('Seleciona categoria "Special Tools" do menu "Categories"', function() {
+        //Clica no menu
         cy.get('[data-test="nav-categories"]')
         .click()
-        cy.get('.navbar-nav > .dropdown > .dropdown-menu')
+
+        //Seleciona Categoria "Special Tools"
+        cy.get('[data-test="nav-special-tools"]')
         .contains('Special Tools')
         .should('be.visible')
         .click()
 
+        //Verifica título da página
         cy.get('[data-test="page-title"]')
         .should('have.text', 'Category: Special Tools')
+    })
 
-        //Seleciona Categoria "Rentals"
+    it('Seleciona categoria "Rentals" do menu "Categories"', function() {
+        //Clica no menu
         cy.get('[data-test="nav-categories"]')
         .click()
-        cy.get('.navbar-nav > .dropdown > .dropdown-menu')
+
+        //Seleciona Categoria "Rentals"
+        cy.get('[data-test="nav-rentals"]')
         .contains('Rentals')
         .should('be.visible')
         .click()
 
+        //Verifica título da página
         cy.get('[data-test="page-title"]')
-        .should('have.text', 'Rentals', {timeout:6000})
+        .should('have.text', 'Rentals')
     })
 
-    it('Verifica lista de idiomas', function() {
+    it('Verifica lista de idiomas.', function() {
         //Verifica Idioma, por padrão o site é carregado em inglês
         cy.get('[data-test="language"]')
         .should('be.visible')
         .click()
 
-        cy.get('#dropdown-animated')
+        cy.get('[class="dropdown-item"]')
         .should('contain', 'DE')
         .should('contain', 'EN')
         .should('contain', 'ES')
         .should('contain', 'FR')
         .should('contain', 'NL')
         .should('contain', 'TR')
+    })
 
+    it('Muda idioma para alemão', function() {
+        //Clica no menu de idiomas
+        cy.get('[data-test="language"]')
+        .click()
+        
         //Muda idioma para alemão
-        cy.get('#dropdown-animated')
+        cy.get('[class="dropdown-item"]')
         .contains('DE')
         .click()
+
         cy.get('[data-test="language"]')
         .should('contain.text', 'DE')
 
-        //Verifica se o idioma mudou
+        //Verifica se o idioma mudou consultando os nomes do botão de pesquisa faixa de preço
         cy.get('#filters')
         .should('contain.text','Sortieren')
         .should('contain.text','Preisspanne')
+    })
 
-        //Muda o idioma para espanhol
+    it('Muda idioma para espanhol', function() {
+        //Clica no menu de idiomas
         cy.get('[data-test="language"]')
         .click()
-        cy.get('#dropdown-animated')
+
+        //Muda o idioma para espanhol
+        cy.get('[class="dropdown-item"]')
         .contains('ES')
         .click()
+
         cy.get('[data-test="language"]')
         .should('contain.text', 'ES')
 
@@ -123,11 +166,15 @@ describe('Fluxo de Compras', function() {
         cy.get('#filters')
         .should('contain.text','Ordenar')
         .should('contain.text','Rango de precios')
+    })
 
-        //Muda o idioma para frances
+    it('Muda o idioma para frances', function() {
+        //Clica no menu de idiomas
         cy.get('[data-test="language"]')
         .click()
-        cy.get('#dropdown-animated')
+
+        //Muda o idioma para frances
+        cy.get('[class="dropdown-item"]')
         .contains('FR')
         .click()
         cy.get('[data-test="language"]')
@@ -137,13 +184,18 @@ describe('Fluxo de Compras', function() {
         cy.get('#filters')
         .should('contain.text','Rechercher')
         .should('contain.text','Fourchette de prix')
+    })
 
-        //Muda o idioma para holandês
+    it('Muda idioma para holandês', function() {
+        //Clica no menu de idiomas
         cy.get('[data-test="language"]')
         .click()
-        cy.get('#dropdown-animated')
+
+        //Muda o idioma para holandês
+        cy.get('[class="dropdown-item"]')
         .contains('NL')
         .click()
+
         cy.get('[data-test="language"]')
         .should('contain.text', 'NL')
 
@@ -151,11 +203,15 @@ describe('Fluxo de Compras', function() {
         cy.get('#filters')
         .should('contain.text','Zoeken')
         .should('contain.text','Prijsklasse')
+    })
 
-        //Muda o idioma para turco
+    it('Muda idioma para turco', function() {
+        //Clica no menu de idiomas
         cy.get('[data-test="language"]')
         .click()
-        cy.get('#dropdown-animated')
+
+        //Muda o idioma para turco
+        cy.get('[class="dropdown-item"]')
         .contains('TR')
         .click()
         cy.get('[data-test="language"]')
@@ -165,6 +221,24 @@ describe('Fluxo de Compras', function() {
         cy.get('#filters')
         .should('contain.text','Sırala')
         .should('contain.text','Fiyat Aralığı')
+    })
+
+    it('Muda idioma para inglês', function() {
+        //Clica no menu de idiomas
+        cy.get('[data-test="language"]')
+        .click()
+
+        //Muda o idioma para turco
+        cy.get('[class="dropdown-item"]')
+        .contains('EN')
+        .click()
+        cy.get('[data-test="language"]')
+        .should('contain.text', 'EN')
+
+        //Verifica se o idioma mudou
+        cy.get('#filters')
+        .should('contain.text','Search')
+        .should('contain.text','Price Range')
     })
 
     it('Verifica se a página "Sign In" é carregada corretamente', function(){
@@ -191,7 +265,14 @@ describe('Fluxo de Compras', function() {
 
         //Registrar nova conta
         cy.get('[data-test="register-link"]')
+        .should('be.visible')  
+    })
+
+    it('Verifica se a página "Forgot Password" é exibida corretamente', function() {
+        //Acessa página de Sign In
+        cy.get('[data-test="nav-sign-in"]')
         .should('be.visible')
+        .click()
 
         //Esqueci minha senha
         cy.get('[data-test="forgot-password-link"]')
@@ -284,394 +365,549 @@ describe('Fluxo de Compras', function() {
         .select('Status of my order')
     })
     
-    it('Verifica filtro de itens da categoria "Hand Tools"', function() {
-
+    it('Verifica se o filtro marca somente itens da categoria "Hand Tools"', function() {
         //Filtra somente por "Hand Tools" na Tela Inicial
-        cy.get(':nth-child(13) > :nth-child(2) > :nth-child(1)')
+        cy.get('label')
         .contains('Hand Tools')
-        .should('be.visible')
         .click()
 
         //Verifica se todos os itens filhos de "Hand Tools" foram marcados
         //Hammer
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(2) > label > input')
+        cy.contains('label', 'Hammer')
+        .find('input[type="checkbox"]')
+        .check()
         .should('be.checked')
         //Hand Saw
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(3) > label > input')
+        cy.contains('label','Hand Saw')
+        .find('input[type="checkbox"]')
+        .check()
         .should('be.checked')
         //Wrench
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(4) > label > input')
+        cy.contains('label','Wrench')
+        .find('input[type="checkbox"]')
+        .check()
         .should('be.checked')
         //Screwdriver
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(5) > label > input')
+        cy.contains('label','Screwdriver')
+        .find('input[type="checkbox"]')
+        .check()
         .should('be.checked')
         //Pliers
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(6) > label > input')
+        cy.contains('label','Pliers')
+        .find('input[type="checkbox"]')
+        .check()
         .should('be.checked')
         //Chisels
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(7) > label > input')
+        cy.contains('label','Chisels')
+        .find('input[type="checkbox"]')
+        .check()
         .should('be.checked')
         //Measures
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(8) > label > input')
+        cy.contains('label','Measures')
+        .find('input[type="checkbox"]')
+        .check()
         .should('be.checked')
 
         //Desmarca todos os itens a categoria "Hand Tools" na Tela Inicial
-        cy.get(':nth-child(13) > :nth-child(2) > :nth-child(1)')
+        cy.get('label')
         .contains('Hand Tools')
         .click()
+    })
+
+    it('Verifica se o filtro desmarca somente itens da categoria "Hand Tools"', function() {
 
         //Verifica se todos os itens estão desmarcados
         //Hammer
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(2) > label > input')
+        cy.contains('label', 'Hammer')
+        .find('input[type="checkbox"]')
         .should('not.be.checked')
         //Hand Saw
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(3) > label > input')
+        cy.contains('label','Hand Saw')
+        .find('input[type="checkbox"]')
         .should('not.be.checked')
         //Wrench
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(4) > label > input')
+        cy.contains('label','Wrench')
+        .find('input[type="checkbox"]')
         .should('not.be.checked')
         //Screwdriver
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(5) > label > input')
+        cy.contains('label','Screwdriver')
+        .find('input[type="checkbox"]')
         .should('not.be.checked')
         //Pliers
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(6) > label > input')
+        cy.contains('label','Pliers')
+        .find('input[type="checkbox"]')
         .should('not.be.checked')
         //Chisels
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(7) > label > input')
+        cy.contains('label','Chisels')
+        .find('input[type="checkbox"]')
         .should('not.be.checked')
         //Measures
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(8) > label > input')
+        cy.contains('label','Measures')
+        .find('input[type="checkbox"]')
         .should('not.be.checked')
-
-        //Seleciona somente itens da categoria "Hammer"
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(2) > label > input')
-        .click()
-
-        /*TODO: {Melhorar o formato com qual comparo se listou somente um tipo de produto específico, atualmente
-        só estou verificando se na tela contém o nome de um produto da categoria mas é necessário adicionar um 
-        "should('not.have.text', 'Hammer', 'Tijolo')"} para poder validar que itens de outras categorias não estão 
-        sendo listados */
-    
-
-        //Verifica se listou somente Martelos
-        cy.get('.col-md-9')
-        .should('contain', 'Thor Hammer')
-
-        //Desmarca itens da categoria "Hammer"
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(2) > label > input')
-        .click()
-
-        //Seleciona somente itens da categoria Hand Saw
-        cy.wait(1000)
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(3) > label > input')
-        .click()
-
-        //Verifica se listou somente Serrotes
-        cy.get('.col-md-9')
-        .should('contain', 'Wood Saw')
-
-        //Desmarca itens da categoria Hand Saw
-        cy.wait(1000)
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(3) > label > input')
-        .click()
-
-        //Seleciona somente itens da categoria Wrench
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(4) > label > input')
-        .click()
-
-        //Verifica se listou somente Chave de Boca
-        cy.get('.col-md-9')
-        .should('contain', 'Wrench')
-        .should('contain', 'Spanner')
-
-        //Desmarca itens da categoria Wrench
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(4) > label > input')
-        .click()
-
-        //Seleciona somente itens da categoria Screwdriver
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(5) > label > input')
-        .click()
-
-        //Verifica se listou somente Chave de Fenda
-        cy.get('.col-md-9')
-        .should('contain', 'Screwdriver')
-
-        //Desmarca itens da categoria Screwdriver
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(5) > label > input')
-        .click()
-
-        //Seleciona somente itens da categoria Pliers
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(6) > label > input')
-        .click()
-
-        //Verifica se listou somente Alicates
-        cy.get('.col-md-9')
-        .should('contain', 'Pliers')
-
-        //Desmarca itens da categoria Pliers
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(6) > label > input')
-        .click()
-
-        //Seleciona somente itens da categoria Chisels
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(7) > label > input')
-        .click()
-
-        //Verifica se listou somente Formão
-        cy.get('.col-md-9')
-        .should('contain', 'Chisels')
-
-        //Desmarca itens da categoria Chisels
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(7) > label > input')
-        .click()
-
-        //Seleciona somente itens da categoria Measures
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(2) > ul > fieldset > div:nth-child(8) > label > input')
-        .click()
-
-        //Verifica se listou somente Fitas Métricas
-        cy.get('.col-md-9')
-        .should('contain', 'Tape Measure')
-        .should('contain', 'Measuring Tape')
-        .should('contain', 'Square Ruler')
     })
 
-    it('Verifica filtro de itens da categoria "Power Tools"', function() {
+    it('Verifica se o filtro listou somente martelos', function() {
+        //Seleciona somente itens da categoria "Hammer"
+        cy.contains('label', 'Hammer')
+        .find('input[type="checkbox"]')
+        .check()
 
+        //Verifica se listou somente Martelos
+        cy.get('[data-test="product-name"]')
+        .should('contain.text', 'Thor Hammer', {timeout: 6000})
+        .should('not.contain.text', 'Pliers')
+        .should('not.contain.text', 'Bolt')
+
+        //Desmarca itens da categoria "Hammer"
+        cy.contains('label', 'Hammer')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
+
+    it('Verifica se o filtro listou somente serrotes', function() {
+        //Seleciona somente itens da categoria Hand Saw
+        cy.contains('label','Hand Saw')
+        .find('input[type="checkbox"]')
+        .check()
+
+        //Verifica se listou somente Serrotes
+        cy.get('[data-test="product-name"]')
+        .should('contain.text', 'Wood Saw')
+        .should('not.contain.text', 'Pliers')
+        .should('not.contain.text', 'Bolt')
+
+        //Desmarca itens da categoria Hand Saw
+        cy.contains('label','Hand Saw')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
+
+    it('Verifica se o filtro listou somente chaves de boca', function() {
+        //Seleciona somente itens da categoria Wrench
+        cy.contains('label','Wrench')
+        .find('input[type="checkbox"]')
+        .check()
+
+        //Verifica se listou somente Chave de Boca
+        cy.get('[data-test="product-name"]')
+        .should('contain.text', 'Adjustable Wrench')
+        .should('contain.text', 'Angled Spanner')
+        .should('not.contain.text', 'Pliers')
+        .should('not.contain.text', 'Bolt')
+
+        //Desmarca itens da categoria Wrench
+        cy.contains('label','Wrench')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
+
+    it('Verifica se o filtro listou somente chaves de fenda', function() {
+        //Seleciona somente itens da categoria Screwdriver
+        cy.contains('label','Screwdriver')
+        .find('input[type="checkbox"]')
+        .check()
+
+        //Verifica se listou somente Chave de Fenda
+        cy.get('[data-test="product-name"]')
+        .should('contain.text', 'Phillips Screwdriver')
+        .should('contain.text', 'Mini Screwdriver')
+        .should('not.contain.text', 'Pliers')
+        .should('not.contain.text', 'Bolt')
+
+        //Desmarca itens da categoria Screwdriver
+        cy.contains('label','Screwdriver')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
+
+    it('Verifica se o filtro listou somente alicates', function(){
+        //Seleciona somente itens da categoria Pliers
+        cy.contains('label','Pliers')
+        .find('input[type="checkbox"]')
+        .check()
+
+        //Verifica se listou somente Alicates
+        cy.get('[data-test="product-name"]')
+        .should('contain.text', 'Pliers')
+        .should('contain.text', 'Combination Pliers')
+        .should('not.contain.text', 'Hammer')
+
+        //Desmarca itens da categoria Pliers
+        cy.contains('label','Pliers')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
+
+    it('Verifica se o filtro listou somente formão', function(){
+        //Seleciona somente itens da categoria Chisels
+        cy.contains('label','Chisels')
+        .find('input[type="checkbox"]')
+        .check()
+ 
+        //Verifica se listou somente Formão
+        cy.get('[data-test="product-name"]')
+        .should('contain.text', 'Chisels Set')
+        .should('contain.text', 'Wood Carving Chisels')
+        .should('not.contain.text', 'Pliers')
+        .should('not.contain.text', 'Bolt')
+ 
+        //Desmarca itens da categoria Chisels
+        cy.contains('label','Chisels')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
+
+    it('Verifica se o filtro listou somente fitas métricas', function(){
+        //Seleciona somente itens da categoria Measures
+        cy.contains('label','Measures')
+        .find('input[type="checkbox"]')
+        .check()
+
+        //Verifica se listou somente Fitas Métricas
+        cy.get('[data-test="product-name"]')
+        .should('contain.text', 'Tape Measure')
+        .should('contain.text', 'Measuring Tape')
+        .should('contain.text', 'Square Ruler')
+        .should('not.contain.text', 'Pliers')
+        .should('not.contain.text', 'Bolt')
+
+        //Desmarca itens da categoria Measures
+        cy.contains('label','Measures')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
+
+    it('Verifica se o filtro marca somente itens da categoria "Power Tools"', function() {
         //Filtra somente por "Power Tools" na Tela Inicial
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > label')
+        cy.get('label')
         .contains('Power Tools')
-        .should('be.visible')
         .click()
 
         //Verifica se todos os itens filhos de "Power Tools" foram selecionados
         //Grinder
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > ul > fieldset > div:nth-child(2) > label > input')
+        cy.contains('label','Grinder')
+        .find('input[type="checkbox"]')
+        .check()
         .should('be.checked')
         //Sander
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > ul > fieldset > div:nth-child(3) > label > input')
+        cy.contains('label','Sander')
+        .find('input[type="checkbox"]')
+        .check()
         .should('be.checked')
         //Saw
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > ul > fieldset > div:nth-child(4) > label > input')
+        cy.contains('label','Saw')
+        .find('input[type="checkbox"]')
+        .check()
         .should('be.checked')
         //Drill
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > ul > fieldset > div:nth-child(5) > label > input')
+        cy.contains('label','Drill')
+        .find('input[type="checkbox"]')
+        .check()
         .should('be.checked')
 
         //Desmarca todos os itens da categoria "Power Tools" na Tela Inicial
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > label')
+        cy.get('label')
         .contains('Power Tools')
         .click()
-
-        //Verifica se todos os itens estão desmarcados
-        //Grinder
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > ul > fieldset > div:nth-child(2) > label > input')
-        .should('not.be.checked')
-        //Sander
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > ul > fieldset > div:nth-child(3) > label > input')
-        .should('not.be.checked')
-        //Saw
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > ul > fieldset > div:nth-child(4) > label > input')
-        .should('not.be.checked')
-        //Drill
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > ul > fieldset > div:nth-child(5) > label > input')
-        .should('not.be.checked')
-
-        //Seleciona somente itens da categoria Grinder
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > ul > fieldset > div:nth-child(2) > label > input')
-        .click()
-        //Verifica se não listou esmeril
-        cy.get('.col-md-9')
-        .should('have.text', 'There are no products found.')
-        //Desmarca itens da categoria Grinders
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > ul > fieldset > div:nth-child(2) > label > input')
-        .click()
-
-        //Seleciona somente itens da categoria Sander
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > ul > fieldset > div:nth-child(3) > label > input')
-        .click()
-        //Verifica se listou somente Lixadeiras
-        cy.get('.col-md-9')
-        .should('contain', 'Belt Sander', { timeout: 6000 })
-        .should('contain', 'Sheet Sander')
-        //Desmarca itens da categoria Sander
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > ul > fieldset > div:nth-child(3) > label > input')
-        .click()
-
-        //Seleciona somente itens da categoria Saw
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > ul > fieldset > div:nth-child(4) > label > input')
-        .click()
-        //Verifica se listou somente Serras
-        cy.get('.col-md-9')
-        .should('contain', 'Saw')
-        //Desmarca itens da categoria Saw
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > ul > fieldset > div:nth-child(4) > label > input')
-        .click()
-
-        //Seleciona somente itens da categoria Drill
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > ul > fieldset > div:nth-child(5) > label > input')
-        .click()
-        //Verifica se listou somente Furadeiras
-        cy.get('.col-md-9')
-        .should('contain', 'Drill')
-        //Desmarca itens da categoria Drill
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(3) > ul > fieldset > div:nth-child(5) > label > input')
-        .click()
-
     })
 
-    it('Verifica filtro de itens da categoria "Other"', function() {
+    it('Verifica se o filtro desmarca somente itens da categoria "Power Tools"', function() {
+        //Verifica se todos os itens estão desmarcados
+        //Grinder
+        cy.contains('label','Grinder')
+        .find('input[type="checkbox"]')
+        .should('not.be.checked')
+        //Sander
+        cy.contains('label','Sander')
+        .find('input[type="checkbox"]')
+        .should('not.be.checked')
+        //Saw
+        cy.contains('label','Saw')
+        .find('input[type="checkbox"]')
+        .should('not.be.checked')
+        //Drill
+        cy.contains('label','Drill')
+        .find('input[type="checkbox"]')
+        .should('not.be.checked')
+    })
 
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(4) > label')
-        .contains('Other')
-        .should('be.visible')
-        .click()
+    it('Verifica se o filtro listou somente esmeril', function(){
+        //Seleciona somente itens da categoria Grinder
+        cy.contains('label','Grinder')
+        .find('input[type="checkbox"]')
+        .check()
+        //Verifica se não listou esmeril pois não existe tal produto no catálogo
+        cy.get('[data-test="no-results"]')
+        .should('have.text', 'There are no products found.')
+        .should('not.contain.text', 'Pliers')
+        .should('not.contain.text', 'Bolt')
+        //Desmarca itens da categoria Grinders
+        cy.contains('label','Grinder')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
+
+    it('Verifica se o filtro listou somente lixadeira', function() {
+        //Seleciona somente itens da categoria Sander
+        cy.contains('label','Sander')
+        .find('input[type="checkbox"]')
+        .check()
+        //Verifica se listou somente Lixadeiras
+        cy.get('[data-test="product-name"]')
+        .should('contain', 'Belt Sander', { timeout: 6000 })
+        .should('contain', 'Sheet Sander')
+        .should('not.contain.text', 'Pliers')
+        .should('not.contain.text', 'Bolt')
+        //Desmarca itens da categoria Sander
+        cy.contains('label','Sander')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
+
+    it('Verifica se o filtro listou somente Serras', function() {
+        //Regex que seleciona somente o campo "Saw" permitindo espaços extras antes ou depois da palavra
+        cy.contains('label', /^\s*Saw\s*$/)
+        .find('input[type="checkbox"]')
+        .check();
+        //Verifica se listou somente Serras
+        cy.get('[data-test="product-name"]')
+        .should('contain', 'Circular Saw')
+        .should('not.contain.text', 'Pliers')
+        .should('not.contain.text', 'Wood Saw') //Verifica se itens da categoria "Hand Saw" não são listados aqui
+        //Desmarca itens da categoria Saw
+        cy.contains('label', /^\s*Saw\s*$/)
+        .find('input[type="checkbox"]')
+        .uncheck();
+    })
+
+    it('Verifica se o filtro listou somente Furadeiras', function() {
+        //Seleciona somente itens da categoria Drill
+        cy.contains('label','Drill')
+        .find('input[type="checkbox"]')
+        .check()
+        //Verifica se listou somente Furadeiras
+        cy.get('[data-test="product-name"]')
+        .should('contain', 'Drill')
+        .should('not.contain.text', 'Pliers')
+        .should('not.contain.text', 'Bolt')
+        //Desmarca itens da categoria Drill
+        cy.contains('label','Drill')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
+
+    it('Verifica se o filtro marca somente itens da categoria "Other"', function() {
+        //Filtra somente por "Other" na Tela Inicial
+        cy.contains('label','Other')
+        .find('input[type="checkbox"]')
+        .check()
+        .should('be.checked')
 
         //Verifica se todos os itens filhos de "Other" foram selecionados
         //Tool Belts
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(4) > ul > fieldset > div:nth-child(2) > label > input')
+        cy.contains('label','Tool Belts')
+        .find('input[type="checkbox"]')
+        .check()
         .should('be.checked')
         //Storage Solutions
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(4) > ul > fieldset > div:nth-child(3) > label > input')
+        cy.contains('label','Solutions')
+        .find('input[type="checkbox"]')
+        .check()
         .should('be.checked')
         //Workbench
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(4) > ul > fieldset > div:nth-child(4) > label > input')
+        cy.contains('label','Workbench')
+        .find('input[type="checkbox"]')
+        .check()
         .should('be.checked')
         //Safety Gear
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(4) > ul > fieldset > div:nth-child(5) > label > input')
+        cy.contains('label','Safety Gear')
+        .find('input[type="checkbox"]')
+        .check()
         .should('be.checked')
         //Fasteners
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(4) > ul > fieldset > div:nth-child(6) > label > input')
+        cy.contains('label','Fasteners')
+        .find('input[type="checkbox"]')
+        .check()
         .should('be.checked')
 
         //Desmarca todos os itens da categoria "Other" na tela inicial
-        cy.get('#filters > fieldset:nth-child(13) > div:nth-child(4) > label')
-        .contains('Other')
-        .click()
+        cy.contains('label','Other')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
 
+    it('Verifica se o filtro desmarca somente itens da categoria "Other"', function() {
         //Verifica se todos os itens estão desmarcados
         //Tool Belts
-        cy.get(':nth-child(4) > ul > fieldset > :nth-child(2) > label')
-        .contains('Tool Belts')
+        cy.contains('label','Tool Belts')
+        .find('input[type="checkbox"]')
         .should('not.be.checked')
         //Storage Solutions
-        cy.get(':nth-child(4) > ul > fieldset > :nth-child(3) > label')
-        .contains('Storage Solutions')
+        cy.contains('label','Solutions')
+        .find('input[type="checkbox"]')
         .should('not.be.checked')
         //Workbench
-        cy.get(':nth-child(4) > ul > fieldset > :nth-child(4) > label')
-        .contains('Workbench')
+        cy.contains('label','Workbench')
+        .find('input[type="checkbox"]')
+        .should('not.be.checked')
+        //Safety Gear
+        cy.contains('label','Safety Gear')
+        .find('input[type="checkbox"]')
         .should('not.be.checked')
         //Fasteners
-        cy.get(':nth-child(4) > ul > fieldset > :nth-child(6) > label')
-        .contains('Fasteners')
+        cy.contains('label','Fasteners')
+        .find('input[type="checkbox"]')
         .should('not.be.checked')
-
-        //Seleciona somente os itens da categoria "Tool Belts"
-        cy.get(':nth-child(4) > ul > fieldset > :nth-child(2) > label')
-        .contains('Tool Belts')
-        .click()
-        //Verifica se listou somente cintos de ferramentas
-        cy.get('.col-md-9')
-        .should('contain', 'toolbelt')
-        //Desmarca itens da categoria "Tool Belts"
-        cy.get(':nth-child(4) > ul > fieldset > :nth-child(2) > label')
-        .contains('Tool Belts')
-        .click()
-
-        //Seleciona somente os itens da categoria "Storage Solutions"
-        cy.get(':nth-child(4) > ul > fieldset > :nth-child(3) > label')
-        .contains('Storage Solutions')
-        .click()
-        //Verifica se listou somente caixa de ferramentas
-        cy.get('.col-md-9')
-        .should('contain', 'Tool Cabinet')
-        //Desmarca itens da categoria "Storage Solutions"
-        cy.get(':nth-child(4) > ul > fieldset > :nth-child(3) > label')
-        .contains('Storage Solutions')
-        .click()
-
-        //Seleciona somente os itens da categoria "Workbench"
-        cy.get(':nth-child(4) > ul > fieldset > :nth-child(4) > label')
-        .contains('Workbench')
-        .click()
-        //Verifica se listou somente bancada de trabalho
-        cy.get('.col-md-9')
-        .should('contain', 'There are no products found.')
-
-        //Desmarca itens da categoria "Workbench"
-        cy.get(':nth-child(4) > ul > fieldset > :nth-child(4) > label')
-        .contains('Workbench')
-        .click()
-
-        //Seleciona somente os itens da categoria "Safety Gear"
-        cy.get(':nth-child(4) > ul > fieldset > :nth-child(5) > label')
-        .contains('Safety Gear')
-        .click()
-        //Verifica se listou somente equipamentos de segurança
-        cy.get('.col-md-9')
-        .should('contain', 'Protection')
-        //Desmarca itens da categoria "Safety Gear"
-        cy.get(':nth-child(4) > ul > fieldset > :nth-child(5) > label')
-        .contains('Safety Gear')
-        .click()
-
-        //Seleciona somente os itens da categoria "Fasteners"
-        cy.get(':nth-child(4) > ul > fieldset > :nth-child(6) > label')
-        .contains('Fasteners')
-        .click()
-        //Verifica se listou somente parafusos e porcas
-        cy.get('.col-md-9')
-        .should('contain', 'Screws')
-        .should('contain', 'Nuts')
-        //Desmarca itens da categoria "Fasteners"
-        cy.get(':nth-child(4) > ul > fieldset > :nth-child(6) > label')
-        .contains('Fasteners')
-        .click()
     })
 
-    it('Verifica filtros de itens da marca "ForgeFlex Tools"', function() {
+    it('Verifica se o filtro listou somente cintos de ferramentas', function() {
+        //Seleciona somente os itens da categoria "Tool Belts"
+        cy.contains('label','Tool Belts')
+        .find('input[type="checkbox"]')
+        .check()
+        //Verifica se listou somente cintos de ferramentas
+        cy.get('[data-test="product-name"]')
+        .should('contain', 'Leather toolbelt')
+        .should('not.contain.text', 'Pliers')
+        .should('not.contain.text', 'Bolt')
+        //Desmarca itens da categoria "Tool Belts"
+        cy.contains('label','Tool Belts')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
 
+    it('Verifica se o filtro listou somente caixas de ferramentas', function() {
+        //Seleciona somente os itens da categoria "Storage Solutions"
+        cy.contains('label','Storage Solutions')
+        .find('input[type="checkbox"]')
+        .check()
+        //Verifica se listou somente caixa de ferramentas
+        cy.get('[data-test="product-name"]')
+        .should('contain', 'Tool Cabinet')
+        .should('not.contain.text', 'Pliers')
+        .should('not.contain.text', 'Bolt')
+        //Desmarca itens da categoria "Storage Solutions"
+        cy.contains('label','Solutions')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
+
+    it('Verifica se o filtro listou somente bancada de trabalho ', function() {
+        //Seleciona somente os itens da categoria "Workbench"
+        cy.contains('label','Workbench')
+        .find('input[type="checkbox"]')
+        .check()
+        //Verifica se listou somente bancada de trabalho
+        cy.get('[data-test="no-results"]')
+        .should('have.text', 'There are no products found.')
+        .should('not.contain.text', 'Pliers')
+        .should('not.contain.text', 'Bolt')
+        //Desmarca itens da categoria "Workbench"
+        cy.contains('label','Workbench')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
+
+    it('Verifica se o filtro listou somente equipamentos de segurança', function() {
+        //Seleciona somente os itens da categoria "Safety Gear"
+        cy.contains('label','Safety Gear')
+        .find('input[type="checkbox"]')
+        .check()
+        //Verifica se listou somente equipamentos de segurança
+        cy.get('[data-test="product-name"]')
+        .should('contain', 'Safety Goggles')
+        .should('contain', 'Construction Helmet')
+        .should('not.contain.text', 'Pliers')
+        .should('not.contain.text', 'Bolt')
+        //Desmarca itens da categoria "Safety Gear"
+        cy.contains('label','Safety Gear')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
+
+    it('Verifica se o filtro listou somente parafusos e porcas', function() {
+        //Seleciona somente os itens da categoria "Fasteners"
+        cy.contains('label','Fasteners')
+        .find('input[type="checkbox"]')
+        .check()
+        //Verifica se listou somente parafusos e porcas
+        cy.get('[data-test="product-name"]')
+        .should('contain', 'Screws')
+        .should('contain', 'Nuts and bolts')
+        .should('not.contain.text', 'Pliers')
+        .should('not.contain.text', 'Bolt')
+        //Desmarca itens da categoria "Fasteners"
+        cy.contains('label','Fasteners')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
+
+    it('Verifica se o filtro selecionou somente a marca "ForgeFlex Tools"', function() {
         //Filtra somente itens da marca "ForgeFlex Tools"
-        cy.get('#filters > fieldset:nth-child(16) > div:nth-child(2) > label')
-        .contains('ForgeFlex Tools',{timeout: 5000})
-        .click()
-        //Filtra por um item específico da marca
-        cy.get('.col-md-9')
-        .should('contain', 'Thor Hammer')
-        //Verifica se a marca "MightyCraft Hardware" não está selecionada
-        cy.get('#filters > fieldset:nth-child(16) > div:nth-child(3) > label')
-        .contains('MightyCraft Hardware')
-        .should('not.be.checked')
+        cy.contains('label','ForgeFlex Tools')
+        .find('input[type="checkbox"]')
+        .check()
+        .should('be.checked')
 
         //Desmarca itens da marca
-        cy.get('#filters > fieldset:nth-child(16) > div:nth-child(2) > label')
-        .contains('ForgeFlex Tools')
-        .click()
-
+        cy.contains('label','ForgeFlex Tools')
+        .find('input[type="checkbox"]')
+        .uncheck()
     })
 
-    it('Verifica filtros de itens da marca "MightyCraft Hardware"', function() {
+    it('Verifica se o filtro listou somente itens da marca "ForgeFlex Tools', function(){
+        cy.contains('label','ForgeFlex Tools')
+        .find('input[type="checkbox"]')
+        .check()
+        .should('be.checked')
+        //Filtra por um item específico da marca
+        cy.get('[data-test="product-name"]')
+        .should('contain', 'Court Hammer')
+        .should('contain', 'Thor Hammer')
+        .should('not.contain.text', 'Screws') //Itens de outra marca
+        .should('not.contain.text', 'Cordless Drill')   
+
+        //Desmarca itens da marca
+        cy.contains('label','ForgeFlex Tools')
+        .find('input[type="checkbox"]')
+        .uncheck()
+    })
+
+    it('Verifica se o filtro selecionou somente a marca "MightyCraft Hardware"', function() {
 
         //Filtra somente itens da marca "MightyCraft Hardware"
-        cy.get('#filters > fieldset:nth-child(16) > div:nth-child(3) > label')
-        .contains('MightyCraft Hardware')
-        .click()
-        //Filtra por um item específico da marca
-        cy.get('.col-md-9')
-        .should('contain', 'Belt Sander')
-        //Verifica se a marca "ForgeFlex Tools" não está selecionada
-        cy.get('#filters > fieldset:nth-child(16) > div:nth-child(2) > label')
-        .contains('ForgeFlex Tools',{timeout: 5000})
-        .should('not.be.checked')
+        cy.contains('label','MightyCraft Hardware')
+        .find('input[type="checkbox"]')
+        .check()
+        .should('be.checked')
 
         //Desmarca itens da marca
-        cy.get('#filters > fieldset:nth-child(16) > div:nth-child(3) > label')
-        .contains('MightyCraft Hardware')
-        .click()
+        cy.contains('label','MightyCraft Hardware')
+        .find('input[type="checkbox"]')
+        .uncheck()
     })
 
-    it('Verifica filtro de pesquisa', function() {
+    it('Verifica se o filtro listou somente itens da marca "MightyCraft Hardware"', function(){
+        cy.contains('label','MightyCraft Hardware')
+        .find('input[type="checkbox"]')
+        .check()
+        .should('be.checked')
 
+        //Filtra por um item específico da marca
+        cy.get('[data-test="product-name"]')
+        .should('contain', 'Long Nose Pliers')
+        .should('contain', 'Cordless Drill')
+        .should('not.contain.text', 'Court Hammer') //Itens de outra marca
+        .should('not.contain.text', 'Thor Hammer')
+
+        //Desmarca itens da marca
+        cy.contains('label','MightyCraft Hardware')
+        .find('input[type="checkbox"]')
+        .uncheck()        
+    })
+
+    it('Verifica filtro de pesquisa para um item existente', function() {
         //Pesquisa por "martelo"
         cy.get('#search-query')
         .type('hammer')
@@ -679,9 +915,11 @@ describe('Fluxo de Compras', function() {
         .contains('Search')
         .click()
         //Verifica se o item foi encontrado
-        cy.get('.col-md-9')
+        cy.get('[data-test="product-name"]')
         .should('contain', 'Claw Hammer')
+    })
 
+    it('Verifica filtro de pesquisa para um item que não existe', function() {
         //Pesquisa por item que não existe no inventário
         cy.get('#search-query')
         .type('cavalo')
@@ -689,57 +927,58 @@ describe('Fluxo de Compras', function() {
         .contains('Search')
         .click()
         //Verifica se o item não foi encontrado
-        cy.get('.col-md-9')
-        .should('contain', 'There are no products found.')
+        cy.get('[data-test="no-results"]')
+        .should('have.text', 'There are no products found.')
+    })
+
+    it('Verifica reset do filtro de pesquisa', function() {
+        //Pesquisa por um item que não existe
+        cy.get('#search-query')
+        .type('macaco')
+        cy.get('button')
+        .contains('Search')
+        .click()
+        //Verifica se o item não foi encontrado
+        cy.get('[data-test="no-results"]')
+        .should('have.text', 'There are no products found.')
 
         //Reseta filtro de pesquisa
         cy.get('[data-test="search-reset"]')
         .click()
-        cy.get('.col-md-9')
-        .should('not.have.text', 'There are no products found.')
+        cy.get('[data-test="search_completed"]')
+        .should('not.have.text', 'There are no products found.') //Verifica se a mensagem de item inexistente não será exibida
     })
 
     it('Verifica filtro por faixa de preço máximo', function() {
-        
-        //Por padrão o site carrega itens com valor de 1 até 100, o objetivo do teste é filtrar por itens de valor até 200
-        cy.reload()
-
-        //TODO: melhorar o formato da interação com o slider de preço
-        //Simula a ação de arrastar o botão de preço até o máximo
-        for (let x = 100; x <= 200; x += 2) {
-            cy.get('span[role="slider"][aria-label="ngx-slider-max"]')
-            .type("{rightarrow}");
-        }
+        //Por padrão o site carrega itens com valor de 1 até 100, o objetivo do teste é filtrar por itens de valor acima de 100
+        //Simula a ação de arrastar o slider até o valor máximo de 200
         cy.get('span[role="slider"][aria-label="ngx-slider-max"]')
-        .should('have.attr', 'aria-valuenow', '200')  
+        .then(($slider) => {
+            $slider[0].setAttribute('aria-valuenow', '200'); // Altera o valor diretamente
+            $slider[0].style.left = '99%'; // Ajusta a posição visual
+        })
+        .should('have.attr', 'aria-valuenow', '200');
     })
 
     it('Verifica filtro por faixa de preço mínimo', function() {
-        
         //Por padrão o site carrega itens com valor de 1 até 100, o objetivo do teste é filtrar por itens de valor até 1
         cy.reload()
-
-        //TODO: melhorar o formato da interação com o slider de preço
-        //Simula a ação de arrastar o botão de preço até o mínimo
-        for (let x = 1; x <= 50; x += 1) {
-            cy.get('span[role="slider"][aria-label="ngx-slider-max"]')
-            .type("{leftarrow}");
-        }
+        //Simula a ação de arrastar o slider até o valor mínimo
         cy.get('span[role="slider"][aria-label="ngx-slider-max"]')
-        .should('have.attr', 'aria-valuenow', '1')     
+        .then(($slider) => {
+            $slider[0].setAttribute('aria-valuenow', '0'); // Altera o valor diretamente
+            $slider[0].style.left = '1%'; // Ajusta a posição visual
+        })
+        .should('have.attr', 'aria-valuenow', '0');
     })
 
-    it('Verifica ordenação de produtos', { defaultCommandTimeout: 15000, retries: 2 }, function() {
+    it('Verifica ordenação por preço [menor - maior]', { defaultCommandTimeout: 15000, retries: 2 }, function() {
         /*Foi definido um número maior de timeout e retry pois o site costuma demorar a responder para
         ordenar os itens da tela, o teste falhava as vezes por demora da resposta.
         */
 
         cy.reload()
-        /*Por padrão o site exibe produtos de $1 até $100,
-        sendo necessário acionar um filtro para visualizar produtos mais caros.
-        */
-
-        //Verifica ordenação por preço [menor - maior]
+        /*Por padrão o site exibe produtos de $1 até $100*/
         var arruela = '$3.55'
         var parafuso = '$3.95'
         var valorAcimaDoFiltrado = '$46.50'
@@ -751,8 +990,9 @@ describe('Fluxo de Compras', function() {
         .should('contain.text', `${arruela}`) //Verifica o item mais barato
         .should('contain.text', `${parafuso}`) //Verifica o segundo item mais barato 
         .should('not.contain.text', `${valorAcimaDoFiltrado}`) //Verificando um valor que não deve existir na primeira página 
+    })
 
-        //Verifica ordenação por preço [maior - menor]
+    it('Verifica ordenação por preço [maior - menor]', function(){
         var armarioFerramentas = '$89.55'
         var caixaFerramentas = '$86.71'
         var valorAbaixoDoFiltrado = '$3.55'
@@ -765,23 +1005,48 @@ describe('Fluxo de Compras', function() {
         .should('contain.text', `${armarioFerramentas}`) //Verifica o item mais caro
         .should('contain.text', `${caixaFerramentas}`) //Verifica o segundo item mais caro
         .should('not.contain.text', `${valorAbaixoDoFiltrado}`) //Verificando um valor baixo que não deve existir na primeira página 
+    })
 
-        //Verifica ordenação alfabética [z - a]
-        var woodFilter = "Wood"
+    it('Verifica ordenação alfabética [z - a]', function() {
+        var palavraFiltro = "Wood" //Filtra por uma palavra que começa com a letra "W"
         cy.get('[data-test="sort"]')
         .select('Name (Z - A)')
         cy.wait(1000)
 
         cy.get('[data-test="sorting_completed"]')
-        .should('contain.text', `${woodFilter}`) //Verifica itens que contenham a palavra "Wood" pois são os primeiros na ordem [z-a]
-        
-        //Verifica ordenação alfabética [a - z]
-        var adjustableFilter = "Adjustable Wrench"
+        .should('contain.text', `${palavraFiltro}`) //Verifica itens que contenham a palavra "Wood" pois são os primeiros na ordem [z-a]
+    })
+
+    it('Verifica ordenação alfabética [a - z]', function() {
+        var palavraFiltro = "Adjustable" //Filtra por uma palavra que começa com letra "A"
         cy.get('[data-test="sort"]')
         .select('Name (A - Z)')
         cy.wait(1000)
 
         cy.get('[data-test="sorting_completed"]')
-        .should('contain.text', `${adjustableFilter}`) //Verifica itens que contenham a palavra "Adjustable Wrench" pois são os primeiros na ordem [a-z]
+        .should('contain.text', `${palavraFiltro}`) //Verifica itens que contenham a palavra "Adjustable Wrench" pois são os primeiros na ordem [a-z]
     })
+
+    it('Verifica paginação numérica', function() {
+       //Acessa página 2
+       cy.get('[aria-label="Page-2"]')
+        .contains('2')
+        .click()
+    })
+
+    it('Verifica paginação pelo botão "Próximo"', function() {
+        //Acessa próxima página
+        cy.get('[aria-label="Next"]')
+        .click()
+     })
+
+     it('Verifica paginação pelo botão "Anterior"', function() {
+        //Acessa página 4
+       cy.get('[aria-label="Page-4"]')
+       .contains('4')
+       .click()
+        //Acessa página anterior
+        cy.get('[aria-label="Previous"]')
+        .click()
+     })
 })
