@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Fluxos do Site', function() {
+describe('Navegação no Site', function() {
 
     this.beforeEach(() => {
         cy.acessaSite()

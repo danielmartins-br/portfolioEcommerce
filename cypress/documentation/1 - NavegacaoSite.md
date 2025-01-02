@@ -1,4 +1,4 @@
-# Testes Automatizados - Fluxos do Site
+# Testes Automatizados - Navegação no Site
 
 O site utilizado para os testes [https://practicesoftwaretesting.com] simula um e-commerce de venda de ferramentas
 para construção civil.
@@ -6,7 +6,7 @@ para construção civil.
 Os testes contidos aqui são referentes ao arquivo:
 ```\cypress\e2e\NavegacaoSiteSpec.cy.js```
     
-Este documento descreve os casos de teste para a suíte **Fluxos do Site**, abordando os seguintes cenários:
+Este documento descreve os casos de teste para a suíte **Navegação no Site**, abordando os seguintes cenários:
 
 ### Escopo
 - Verificação de elementos visuais.
@@ -94,7 +94,7 @@ Este documento descreve os casos de teste para a suíte **Fluxos do Site**, abor
 
 ### 17. Página "Customer Registration"
 * **Descrição:** Verifica se a página "Customer Registration" é exibida corretamente.
-* **Cenário:** Ao clicar em "Register your account" dentro da página de login, o site deve redirecionar o usuário para dentro de uma nova página de criação de usuário. Dentro dessa nova página devem ser apresentados corretamente todos os campos de dados necessários para criação do novo usuário: ['First name', 'Last name', 'Date of Birth', 'Address', 'Postcode', 'City', 'State', 'Country', 'Phone', 'Email address', 'Password'] e também o botão "Regiter".
+* **Cenário:** Ao clicar em "Register your account" dentro da página de login, o site deve redirecionar o usuário para dentro de uma nova página de criação de usuário. Dentro dessa nova página devem ser apresentados corretamente todos os campos de dados necessários para criação do novo usuário: ['First name', 'Last name', 'Date of Birth', 'Address', 'Postcode', 'City', 'State', 'Country', 'Phone', 'Email address', 'Password'] e também o botão "Register".
 
 ### 18. Página "Contact"
 * **Descrição:** Verifica se a página "Contact" é carregada corretamente.
