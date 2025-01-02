@@ -4,7 +4,7 @@
 
 Projeto desenvolvido para automação de testes utilizando Cypress. Este repositório contém scripts de testes para verificar as funcionalidades de um site de e-commerce, incluindo fluxos de compra, navegação e gerenciamento de contas.
 
-O meu objetivo principal com o projeto é aprender a utilizar Cypress e praticar o conteúdo visto no curso da "Talking About Testing".
+O meu objetivo principal com o projeto é aprender a utilizar Cypress e praticar o conteúdo visto no curso da escola "Talking About Testing".
 
 #### Funcionalidades
 - Teste de Navegação no Site (https://practicesoftwaretesting.com/)
@@ -31,7 +31,7 @@ O meu objetivo principal com o projeto é aprender a utilizar Cypress e praticar
 - Cypress configurado no ambiente local.
 
 #### Documentação do Projeto
-A documentação para todos os casos de teste implementados encontra-se na pasta ```.\cypress\documentation\```
+A documentação para todos os casos de teste implementados encontra-se na pasta ```\cypress\documentation\```
 
 #### Instalação
 1. Clone o repositório:
@@ -40,22 +40,22 @@ A documentação para todos os casos de teste implementados encontra-se na pasta
 2. Acesse a pasta do projeto:
    ```bash
    cd portfolioEcommerce
-4. Dentro da pasta instale as dependências:
+3. Dentro da pasta instale as dependências:
    ```bash
    npm install
-5. Execute o Cypress:
+4. Execute o Cypress:
    ```bash
    npx cypress open
-6. Dentro do Cypress selecione:
+5. Dentro do Cypress selecione:
    ```bash
    E2E Testing
-7. Selecione um browser:
+6. Selecione um browser:
    ```bash
    Chrome
-8. Clique em:
+7. Clique em:
    ```bash
    Start E2E Testing in Chrome
-9. Dentro de **Specs** selecione o teste que deseja executar:
+8. Dentro de **Specs** selecione o teste que deseja executar:
    ```bash
    Exemplo: cypress/e2e/NavegacaoSiteSpec.cy.js
 
@@ -91,5 +91,5 @@ Exemplo: ```npx cypress run --spec cypress/integration/nome-do-arquivo-spec.js``
    * [X] - Criação de documentação para cada caso de teste
    * [ ] - Implementação de page objects model para melhorar a legibilidade/organização dos testes
    * [X] - Criar novos casos de teste contemplando mais funcionalidades do site
-   * [ ] - Criar novoso casos de teste que interagem diretamente com as funcionalidades do site [criar usuário, preencher carrinho...]
-   * [ ] - Criar documentação para cada um dos novos casos de teste de interação
+   * [ ] - Criar novos casos de teste que interagem diretamente com as funcionalidades do site [criar usuário, preencher carrinho...]
+   * [X] - Criar documentação para cada um dos novos casos de teste de interação com as funcionalidades do site
