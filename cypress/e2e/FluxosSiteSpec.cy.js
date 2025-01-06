@@ -6,6 +6,19 @@ describe('Fluxos do Site', function() {
         cy.acessaSite()
     })
 
+    //Dados para criação de usuário
+    const nome = 'Ronnie'
+    const sobrenome = 'Coleman'
+    const nascimento = '1964-05-13'
+    const endereco = 'Rua T'
+    const codigoPostal = '90263'
+    const cidade = 'Monroe'
+    const estado = 'Luisiana'
+    const pais = 'Mexico'
+    const telefone = '19201834'
+    const email = 'email@umemail.com'
+    const senha = '1234aB12#;00'
+
     it('Adiciona produto no carrinho', function() {
         const nomeProduto = 'Thor Hammer'
         //Pesquisa produto
@@ -260,8 +273,8 @@ describe('Fluxos do Site', function() {
     })
 
     it('Adicionar produto ao carrinho e tenta finalizar compra sem ter conta de usuário.', function() {
-        const email = 'qualquer@qualquer.com'
-        const senha = '1234567'
+        const emailInexistente = 'qualquer@qualquer.com'
+        const senhaInexistente = '1234567'
         const nomeProduto = 'Ear Protection'
         //Pesquisa produto
         cy.get('[data-test="search-query"]')
@@ -286,9 +299,9 @@ describe('Fluxos do Site', function() {
 
         //Digita dados e clica em "Login"
         cy.get('[data-test="email"]')
-        .type(`${email}`)
+        .type(`${emailInexistente}`)
         cy.get('[data-test="password"]')
-        .type(`${senha}`)
+        .type(`${senhaInexistente}`)
         cy.get('[data-test="login-submit"]')
         .click()
         //Verifica mensagem de credenciais invalidas
@@ -739,13 +752,8 @@ describe('Fluxos do Site', function() {
     
     //TODO: melhorar a forma com que os dados são gerados para utilizar nesse teste, talvez utilizar faker
     it('Verifica se o campo "Date of Birth" valida idade máxima para registro.', function() {
-        const nome = 'Frank'
-        const sobrenome = 'Zane'
-        const nascimento = '1921-06-10'
+        const nascimentoAcimaDoPermitido = '1921-06-10'
         const dadosAleatorios = '190263'
-        const pais = 'Andorra'
-        const email = 'email@endereco.com'
-        const senha = 'senhaForte1@'
         
         //Acessa registro de usuario 
         cy.get('[data-test="nav-sign-in"]')
@@ -780,7 +788,7 @@ describe('Fluxos do Site', function() {
 
         //Digita idade acima de 75 anos
         cy.get('[data-test="dob"]')
-        .type(nascimento)
+        .type(nascimentoAcimaDoPermitido)
 
         //Clica em "Register"
         cy.get('[data-test="register-submit"]')
@@ -902,18 +910,6 @@ describe('Fluxos do Site', function() {
     })
 
     it('Verifica se é possível registrar um novo usuário corretamente.', function() {
-        const nome = 'Ronnie'
-        const sobrenome = 'Coleman'
-        const nascimento = '1964-05-13'
-        const endereco = 'Rua T'
-        const codigoPostal = '90263'
-        const cidade = 'Monroe'
-        const estado = 'Luisiana'
-        const pais = 'Mexico'
-        const telefone = '19201834'
-        const email = 'email@umemail.com'
-        const senha = '1234aB12#;00'
-        
         //Acessa registro de usuario 
         cy.get('[data-test="nav-sign-in"]')
         .click()
