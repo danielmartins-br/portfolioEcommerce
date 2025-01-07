@@ -15,7 +15,7 @@ Este documento descreve os casos de teste para a suíte **Fluxos do Site**, abor
 - Compra de produto.
 
 ### Fora de Escopo
-- Verificação de elementos visuais.
+- Verificação somente de elementos visuais.
 - Funcionalidade de menus e barra de pesquisa.
 - Funcionalidade de filtros.
 - Navegação pelas categorias de produtos.
@@ -156,7 +156,7 @@ Password can not include invalid characters.".
 
 ### 33. Adiciona Favorito
 * **Descrição:** Verifica se um item favoritado é acessível através de "My favorites"
-* **Cenário:** Ao selecionar um produto e clicar em "Add to favourites", o site deve exibir a seguinte mensagem "Product added to your favorites list." e o produto deve salvo e listado posteriormente na funcionalidade "My favorites".
+* **Cenário:** Ao selecionar um produto e clicar em "Add to favourites", o site deve exibir a seguinte mensagem "Product added to your favorites list." e o produto deve ser salvo e listado posteriormente na funcionalidade "My favorites".
 
 ### 34. Duplica Favorito
 * **Descrição:** Verifica se um item favoritado é duplicável
@@ -174,12 +174,12 @@ Password can not include invalid characters.".
 * **Descrição:** Verifica se é possível alterar os dados apresentados em "My profile"
 * **Cenário:** Ao acessar a funcionalidade "My profile" e modificar algum dado de usuário, após clicar em "Update Profile" os novos dados devem ser salvos sem apresentar erro.
 
-### 38. Altera Senha 
+### 38. Altera Senha
 * **Descrição:** Verifica se é possível alterar a senha do usuário em "My profile"
 * **Cenário:** Acessar a funcionalidade "My profile" e modificar a senha do usuário atual para uma nova senha válida, após clicar em "Change Password" o site deve apresentar a mensagem "Your password is successfully updated!" informando que o usuário alterou sua senha com sucesso, o site também deve fazer logout do usuário.
 
 ### 39. Altera a Mesma Senha
-* **Descrição:** Verifica se o site impede o usuário de alterar a senha para a mesma 
+* **Descrição:** Verifica se o site impede o usuário de alterar a senha para a senha atual
 * **Cenário:** Acessar a funcionalidade "My profile" e modificar a senha do usuário atual para a mesma senha e clicar em "Change Password", o site deve exibir a seguinte mensagem "New Password cannot be same as your current password." informando que a nova senha e a atual não podem ser iguais.
 
 ### 40. Envia Contato
@@ -191,7 +191,7 @@ Password can not include invalid characters.".
 * **Cenário:** Acessar a página "Contact", não preencher nenhum dos campos e clicar no botão "Send", após isso o site deve apresentar a mensagem "Subject is required" abaixo do campo "Subject" e "Message is required" abaixo do campo "Message", informando que os dois campos são de preenchimento obrigatório.
 
 ### 42. Preeche Contato Errado
-* **Descrição:** Verifica se é possível fazer o envio de contato preenchendo os dados de maneira errada
+* **Descrição:** Verifica se é possível fazer o envio de contato preenchendo o campo "Message" de maneira errada
 * **Cenário:** Acessar a página "Contact", escolher uma opção para "Subject" e preencher o campo "Message *" com uma mensagem que contenha menos de 50 caracteres, clicar no botão "Send". O site deve apresentar a mensagem "Message must be minimal 50 characters" alertando que o campo de mensagem está mal preenchido.
 
 ### 43. Lista Fatura
@@ -199,7 +199,7 @@ Password can not include invalid characters.".
 * **Cenário:** Ao acessar a página "My invoices", devem ser apresentadas as seguintes colunas: "Invoice Number", "Billing Address", "Invoice Date" e "Total". 
 
 ### 44. Confere Fatura
-* **Descrição:** Verifica se é possível consultar os dados uma fatura 
+* **Descrição:** Verifica se é possível consultar os dados de uma fatura 
 * **Cenário:** Ao acessar a página "My invoices", deve ser possível consultar uma fatura específica a partir do botão "Details". Dentro dos detalhes da fatura deve conter um botão para fazer download da mesma em PDF, devem ser exibidas as informações de pagamento, endereço da compra, lista de produtos comprados e os dados gerais da compra informando a data, o valor total e código de fatura.
 * **Observação:** Para consultar uma fatura é necessário utilizar uma conta de usuário que contenha faturas no histórico.
 
@@ -213,6 +213,18 @@ Password can not include invalid characters.".
 
 ### 47. Faz Compra
 * **Descrição:** Verifica se é possível fazer uma compra com sucesso
-* **Cenário:** Estando logado em uma conta, o usuário deve adicionar produtos no carrinho. Ao acessar o carrinho, deve-se clicarm em "Proceed to checkout" para prosseguir com a compra, na tela "Sign in" deve ser apresentada uma mensagem informando que o usuário já está logado em sua conta, na página "Billing Address" deve conter os dados que foram cadastrados anteriormente durante a criação de usuário, por último na tela "Payment" deve conter várias opções de pagamento ['Bank Transfer', 'Cash on Delivery', 'Credit Card', 'Buy Now Pay Later', 'Gift Card'] após selecionar uma forma de pagamento e clicar em "Confirm" o site deve informar que o pagamento foi feito com sucesso e informar o número da fatura gerada.
+* **Cenário:** Estando logado em uma conta, o usuário deve adicionar produtos no carrinho. Ao acessar o carrinho, deve-se clicarm em "Proceed to checkout" para prosseguir com a compra, na tela "Sign in" deve ser apresentada uma mensagem informando que o usuário já está logado em sua conta, na página "Billing Address" deve conter os dados que foram cadastrados anteriormente durante a criação de usuário, por último na tela "Payment" deve conter várias opções de pagamento ['Bank Transfer', 'Cash on Delivery', 'Credit Card', 'Buy Now Pay Later', 'Gift Card'] após selecionar uma forma de pagamento e clicar em "Confirm", o site deve informar que o pagamento foi feito com sucesso e informar o número da fatura gerada.
 
 ### 48. Recupera Senha Válida
+* **Descrição:** Verifica se é possível que um usuário válido recupere sua senha
+* **Cenário:** Acessa a tela de cadastro de usuário, clica em "Forgot your Password?", digita o email do usuário e clica em "Set new password". 
+* **Observação:** O site não apresenta nenhuma confirmação visual de que a senha foi alterada, então é necessário fazer um novo login para identificar se foi alterada.
+
+### 49. Faz Compra Inválida
+* **Descrição:** Verifica se o site impede uma compra quando os dados de pagamento são inválidos
+* **Cenário:** Estando logado em uma conta, o usuário deve adicionar produtos no carrinho. Ao acessar o carrinho, deve-se clicarm em "Proceed to checkout" para prosseguir com a compra, na tela "Sign in" deve ser apresentada uma mensagem informando que o usuário já está logado em sua conta, na página "Billing Address" deve conter os dados que foram cadastrados anteriormente durante a criação de usuário, por último na tela "Payment" deve ser escolhida uma das duas seguintes formas de pagamento que exigem preenchimento de informações bancárias ['Bank Transfer', 'Credit Card'], após selecionar uma forma de pagamento e preencher todas as informações de maneira errada e clicar em "Confirm", o site deve informar que o pagamento não pode ser processado e informar os erros de preenchimento.
+* **Observação:** Somente as opções ['Bank Transfer', 'Credit Card'] validam os dados de pagamento.
+
+### 50. Registra o Mesmo Usuário
+* **Descrição:** Verifica se é possível registrar um usuário mais de uma vez
+* **Cenário:** Acessar a tela de criação de novo usuário e preencher todos os campos obrigatórios com informações de um usuário já existente, ao clicar em "Register" o site deve impedir o novo usuário de ser registrado.
