@@ -11,7 +11,7 @@ O meu objetivo principal com o projeto é aprender a utilizar Cypress e praticar
 - Testes automatizados para validação de funcionalidades principais.
 - Scripts para verificar fluxos críticos, como finalização de compras e navegação entre páginas.
 - Configuração de ambiente e exemplos de comandos personalizados.
-- Integração com APIs para consultas e validações de dados.
+- ~~Integração com APIs para consultas e validações de dados.~~
 
 #### Tecnologias Usadas
 - [Node.js](https://nodejs.org)
@@ -31,7 +31,7 @@ O meu objetivo principal com o projeto é aprender a utilizar Cypress e praticar
 - Cypress configurado no ambiente local.
 
 #### Documentação do Projeto
-A documentação para todos os casos de teste implementados encontra-se na pasta ```\cypress\documentation\```
+A documentação para todos os casos de teste implementados encontra-se na pasta ```cypress\documentation\```
 
 #### Instalação
 1. Clone o repositório:
@@ -81,18 +81,18 @@ Exemplo: ```npx cypress run --headless```
 * Execução de Testes Específicos:
 Utilize no terminal o comando ```npx cypress run --spec``` para executar arquivos de testes específicos.
 Isso é útil ao trabalhar em testes individuais durante o desenvolvimento.
-Exemplo: ```npx cypress run --spec cypress/integration/nome-do-arquivo-spec.js```
+Exemplo: ```npx cypress run --spec cypress/e2e/nome-do-arquivo-spec.js```
 
 ##### 🗨️ Nota do Desenvolvedor:
-* O projeto agora encontra-se com documentação, foi criado o código com 56 casos de teste que verificam todas as funcionalidades de navegação do site porém não interage diretamente com elas, por exemplo produtos não são adicionados no carrinho e nem é criado uma nova conta para o usuário, somente é verificado se os produtos são listados em tela e  se os campos de dados do usuário são exibidos em tela. 
-* Foram criados mais 50 novos testes para contemplar os diversos fluxos do site [criação de usuário, compra de produto, alteração de senha, alteração de dados e mais]...
+* O projeto agora possui documentação e 56 casos de teste que verificam funcionalidades de navegação do site. Esses testes garantem que elementos como produtos e campos de dados do usuário sejam exibidos corretamente em tela, mas não incluem interações como adicionar produtos ao carrinho ou criar contas.
+* Foram desenvolvidos mais 50 testes adicionais cobrindo fluxos completos do site, incluindo criação de usuário, compra de produto, alteração de senha, atualização de dados, entre outros.
 * Foi observado que muitos dos problemas que tive durante o desenvolvimento foi por falta de uma base sólida em Javascript, futuramente terei que focar os estudos nessa linguagem para melhorar a qualidade de escrita dos testes.
 
   **📃 Lista das próximas melhorias:**
    * [X] - ~~Criação de documentação para cada caso de teste referente a navegação no site~~
-   * [ ] - Implementação de page objects model para melhorar a legibilidade/organização dos testes
+   * [ ] - Implementação de Page Objects Model para melhorar a legibilidade/organização dos testes
    * [X] - ~~Criar novos casos de teste contemplando mais funcionalidades de navegação no site~~
-   * [X] - ~~Criar novos casos de teste que interagem diretamente com as funcionalidades de fluxo do site [criar usuário, preencher carrinho...]~~
+   * [X] - ~~Criar novos casos de teste que interagem diretamente com as funcionalidades de fluxo do site (criar usuário, preencher carrinho...)~~
    * [X] - ~~Criar documentação para cada um dos novos casos de teste de interação com as funcionalidades de fluxo do site~~
    * [ ] - Remover código duplicado dos testes de navegação do site
    * [ ] - Remover código duplicado dos testes de fluxos do site
