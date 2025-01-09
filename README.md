@@ -94,5 +94,5 @@ Exemplo: ```npx cypress run --spec cypress/e2e/nome-do-arquivo-spec.js```
    * [X] - ~~Criar novos casos de teste contemplando mais funcionalidades de navegação no site~~
    * [X] - ~~Criar novos casos de teste que interagem diretamente com as funcionalidades de fluxo do site (criar usuário, preencher carrinho...)~~
    * [X] - ~~Criar documentação para cada um dos novos casos de teste de interação com as funcionalidades de fluxo do site~~
-   * [ ] - Remover código duplicado dos testes de navegação do site
+   * [X] - ~~Remover código duplicado dos testes de navegação do site~~
    * [ ] - Remover código duplicado dos testes de fluxos do site
