@@ -85,7 +85,7 @@ Exemplo: ```npx cypress run --spec cypress/e2e/nome-do-arquivo-spec.js```
 
 ##### 🗨️ Nota do Desenvolvedor:
 * O projeto agora possui documentação e 56 casos de teste que verificam funcionalidades de navegação do site. Esses testes garantem que elementos como produtos e campos de dados do usuário sejam exibidos corretamente em tela, mas não incluem interações como adicionar produtos ao carrinho ou criar contas.
-* Foram desenvolvidos mais 50 testes adicionais cobrindo fluxos completos do site, incluindo criação de usuário, compra de produto, alteração de senha, atualização de dados, entre outros.
+* Foram desenvolvidos mais 55 testes adicionais cobrindo fluxos completos do site, incluindo criação de usuário, compra de produto, alteração de senha, atualização de dados, entre outros.
 * Foi observado que muitos dos problemas que tive durante o desenvolvimento foi por falta de uma base sólida em Javascript, futuramente terei que focar os estudos nessa linguagem para melhorar a qualidade de escrita dos testes.
 
   **📃 Lista das próximas melhorias:**
@@ -95,4 +95,5 @@ Exemplo: ```npx cypress run --spec cypress/e2e/nome-do-arquivo-spec.js```
    * [X] - ~~Criar novos casos de teste que interagem diretamente com as funcionalidades de fluxo do site (criar usuário, preencher carrinho...)~~
    * [X] - ~~Criar documentação para cada um dos novos casos de teste de interação com as funcionalidades de fluxo do site~~
    * [X] - ~~Remover código duplicado dos testes de navegação do site~~
-   * [ ] - Remover código duplicado dos testes de fluxos do site
+   * [X] - ~~Remover código duplicado dos testes de fluxos do site~~
+   * [ ] - Transformar em comando personalizado as mensagens de erro/sucesso, isso irá permitir uma manipulação mais fácil delas em cada teste.
