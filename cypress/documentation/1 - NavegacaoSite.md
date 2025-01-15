@@ -4,7 +4,7 @@ O site utilizado para os testes [https://practicesoftwaretesting.com] simula um 
 para construção civil.
 
 Os testes contidos aqui são referentes ao arquivo:
-```\cypress\e2e\NavegacaoSiteSpec.cy.js```
+```cypress\e2e\1 - NavegacaoSiteSpec.cy.js```
     
 Este documento descreve os casos de teste para a suíte **Navegação no Site**, abordando os seguintes cenários:
 
