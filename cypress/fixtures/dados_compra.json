@@ -1,1 +1,8 @@
-{}
+{
+    "codigoPedido": "INV-20240000018",
+    "meioDepagamento": "Gift Card",
+    "quantidadeProduto": 3,
+    "nomeProduto": "Combination Pliers",
+    "totalCarrinho": 54.46,
+    "precoProduto": 14.15
+  }

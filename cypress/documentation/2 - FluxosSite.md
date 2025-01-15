@@ -4,7 +4,7 @@ O site utilizado para os testes [https://practicesoftwaretesting.com] simula um 
 para construção civil.
 
 Os testes contidos aqui são referentes ao arquivo:
-```\cypress\e2e\```
+```cypress\e2e\2 - FluxosSiteSpec.cy.js```
     
 Este documento descreve os casos de teste para a suíte **Fluxos do Site**, abordando os seguintes cenários:
 
@@ -211,20 +211,41 @@ Password can not include invalid characters.".
 * **Descrição:** Verifica se é possível fazer logout do site
 * **Cenário:** Estando logado em uma conta, quando o usuário acionar a opção "Sign out" o site deve sair imediatamente de sua conta.
 
-### 47. Faz Compra
-* **Descrição:** Verifica se é possível fazer uma compra com sucesso
-* **Cenário:** Estando logado em uma conta, o usuário deve adicionar produtos no carrinho. Ao acessar o carrinho, deve-se clicarm em "Proceed to checkout" para prosseguir com a compra, na tela "Sign in" deve ser apresentada uma mensagem informando que o usuário já está logado em sua conta, na página "Billing Address" deve conter os dados que foram cadastrados anteriormente durante a criação de usuário, por último na tela "Payment" deve conter várias opções de pagamento ['Bank Transfer', 'Cash on Delivery', 'Credit Card', 'Buy Now Pay Later', 'Gift Card'] após selecionar uma forma de pagamento e clicar em "Confirm", o site deve informar que o pagamento foi feito com sucesso e informar o número da fatura gerada.
+### 47. Faz Compra com Transferência Bancária
+* **Descrição:** Verifica se é possível fazer uma compra com sucesso utilizando transferência bancária
+* **Cenário:** Estando logado em uma conta, o usuário deve adicionar produtos no carrinho. Ao acessar o carrinho, deve-se clicarm em "Proceed to checkout" para prosseguir com a compra, na tela "Sign in" deve ser apresentada uma mensagem informando que o usuário já está logado em sua conta, na página "Billing Address" deve conter os dados que foram cadastrados anteriormente durante a criação de usuário, por último na tela "Payment" deve ser selecionada a opção de pagamento 'Bank Transfer', após preencher os dados de pagamento e clicar em "Confirm", o site deve informar que o pagamento foi feito com sucesso e informar o número da fatura gerada.
 
-### 48. Recupera Senha Válida
+### 48. Faz Compra e Paga na Entrega
+* **Descrição:** Verifica se é possível fazer uma compra com sucesso utilizando pagamento no momento do recebimento do produto
+* **Cenário:** Estando logado em uma conta, o usuário deve adicionar produtos no carrinho. Ao acessar o carrinho, deve-se clicarm em "Proceed to checkout" para prosseguir com a compra, na tela "Sign in" deve ser apresentada uma mensagem informando que o usuário já está logado em sua conta, na página "Billing Address" deve conter os dados que foram cadastrados anteriormente durante a criação de usuário, por último na tela "Payment" deve ser selecionada a opção 'Cash on Delivery', após preencher os dados de pagamento e clicar em "Confirm", o site deve informar que o pagamento foi feito com sucesso e informar o número da fatura gerada.
+
+### 49. Faz Compra Cartão
+* **Descrição:** Verifica se é possível fazer uma compra com sucesso utilizando pagamento no cartão de crédito
+* **Cenário:** Estando logado em uma conta, o usuário deve adicionar produtos no carrinho. Ao acessar o carrinho, deve-se clicarm em "Proceed to checkout" para prosseguir com a compra, na tela "Sign in" deve ser apresentada uma mensagem informando que o usuário já está logado em sua conta, na página "Billing Address" deve conter os dados que foram cadastrados anteriormente durante a criação de usuário, por último na tela "Payment" deve ser selecionada a opção 'Credit Card', após preencher os dados de pagamento e clicar em "Confirm", o site deve informar que o pagamento foi feito com sucesso e informar o número da fatura gerada.
+
+### 50. Faz Compra a Prazo
+* **Descrição:** Verifica se é possível fazer uma compra com sucesso utilizando Compre agora e pague depois
+* **Cenário:** Estando logado em uma conta, o usuário deve adicionar produtos no carrinho. Ao acessar o carrinho, deve-se clicarm em "Proceed to checkout" para prosseguir com a compra, na tela "Sign in" deve ser apresentada uma mensagem informando que o usuário já está logado em sua conta, na página "Billing Address" deve conter os dados que foram cadastrados anteriormente durante a criação de usuário, por último na tela "Payment" deve ser selecionada a opção 'Buy Now Pay Later', após preencher os dados de pagamento e clicar em "Confirm", o site deve informar que o pagamento foi feito com sucesso e informar o número da fatura gerada.
+
+### 51. Faz Compra Gift Card
+* **Descrição:** Verifica se é possível fazer uma compra com sucesso utilizando Gift Card
+* **Cenário:** Estando logado em uma conta, o usuário deve adicionar produtos no carrinho. Ao acessar o carrinho, deve-se clicarm em "Proceed to checkout" para prosseguir com a compra, na tela "Sign in" deve ser apresentada uma mensagem informando que o usuário já está logado em sua conta, na página "Billing Address" deve conter os dados que foram cadastrados anteriormente durante a criação de usuário, por último na tela "Payment" deve ser selecionada a opção 'Gift Card', após preencher os dados de pagamento e clicar em "Confirm", o site deve informar que o pagamento foi feito com sucesso e informar o número da fatura gerada.
+
+### 52. Recupera Senha Válida
 * **Descrição:** Verifica se é possível que um usuário válido recupere sua senha
 * **Cenário:** Acessa a tela de cadastro de usuário, clica em "Forgot your Password?", digita o email do usuário e clica em "Set new password". 
 * **Observação:** O site não apresenta nenhuma confirmação visual de que a senha foi alterada, então é necessário fazer um novo login para identificar se foi alterada.
 
-### 49. Faz Compra Inválida
-* **Descrição:** Verifica se o site impede uma compra quando os dados de pagamento são inválidos
-* **Cenário:** Estando logado em uma conta, o usuário deve adicionar produtos no carrinho. Ao acessar o carrinho, deve-se clicarm em "Proceed to checkout" para prosseguir com a compra, na tela "Sign in" deve ser apresentada uma mensagem informando que o usuário já está logado em sua conta, na página "Billing Address" deve conter os dados que foram cadastrados anteriormente durante a criação de usuário, por último na tela "Payment" deve ser escolhida uma das duas seguintes formas de pagamento que exigem preenchimento de informações bancárias ['Bank Transfer', 'Credit Card'], após selecionar uma forma de pagamento e preencher todas as informações de maneira errada e clicar em "Confirm", o site deve informar que o pagamento não pode ser processado e informar os erros de preenchimento.
+### 53. Faz Compra Inválida com Tranferência Bancária
+* **Descrição:** Verifica se o site impede uma compra quando os dados de transferência bancária são inválidos.
+* **Cenário:** Estando logado em uma conta, o usuário deve adicionar produtos no carrinho. Ao acessar o carrinho, deve-se clicarm em "Proceed to checkout" para prosseguir com a compra, na tela "Sign in" deve ser apresentada uma mensagem informando que o usuário já está logado em sua conta, na página "Billing Address" deve conter os dados que foram cadastrados anteriormente durante a criação de usuário, por último na tela "Payment" deve ser escolhida a forma de pagamento 'Bank Transfer', após preencher todas as informações de maneira errada e clicar em "Confirm", o site deve informar que o pagamento não pode ser processado e informar os erros de preenchimento.
 * **Observação:** Somente as opções ['Bank Transfer', 'Credit Card'] validam os dados de pagamento.
 
-### 50. Registra o Mesmo Usuário
+### 54. Faz Compra Inválida
+* **Descrição:** Verifica se o site impede uma compra quando os dados de transferência bancária são inválidos.
+* **Cenário:** Estando logado em uma conta, o usuário deve adicionar produtos no carrinho. Ao acessar o carrinho, deve-se clicarm em "Proceed to checkout" para prosseguir com a compra, na tela "Sign in" deve ser apresentada uma mensagem informando que o usuário já está logado em sua conta, na página "Billing Address" deve conter os dados que foram cadastrados anteriormente durante a criação de usuário, por último na tela "Payment" deve ser escolhida a forma de pagamento'Credit Card', após preencher todas as informações de maneira errada e clicar em "Confirm", o site deve informar que o pagamento não pode ser processado e informar os erros de preenchimento.
+* **Observação:** Somente as opções ['Bank Transfer', 'Credit Card'] validam os dados de pagamento.
+
+### 55. Registra o Mesmo Usuário
 * **Descrição:** Verifica se é possível registrar um usuário mais de uma vez
 * **Cenário:** Acessar a tela de criação de novo usuário e preencher todos os campos obrigatórios com informações de um usuário já existente, ao clicar em "Register" o site deve impedir o novo usuário de ser registrado.
