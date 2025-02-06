@@ -96,4 +96,6 @@ Exemplo: ```npx cypress run --spec cypress/e2e/nome-do-arquivo-spec.js```
    * [X] - ~~Criar documentação para cada um dos novos casos de teste de interação com as funcionalidades de fluxo do site~~
    * [X] - ~~Remover código duplicado dos testes de navegação do site~~
    * [X] - ~~Remover código duplicado dos testes de fluxos do site~~
-   * [ ] - Transformar em comando personalizado as mensagens de erro/sucesso, isso irá permitir uma manipulação mais fácil delas em cada teste.
+   * [ ] - Transformar em comando personalizado as mensagens de erro/sucesso, isso irá permitir uma manipulação melhor delas em cada teste.
+   * [ ] - Criar documentação para os casos de teste referente ao usuário administrador do site.
+   * [ ] - Implementar os casos de teste referente ao administrador do site.
